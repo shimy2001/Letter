@@ -811,18 +811,38 @@ document.addEventListener("mouseup", () => {
     }
 });
 
-function shakeGlobe() {
-    globe.animate([
-        { transform: "translateX(5px) rotate(2deg)" },
-        { transform: "translateX(-5px) rotate(-2deg)" },
-        { transform: "translateX(5px) rotate(2deg)" },
-        { transform: "translateX(0) rotate(0deg)" }
-    ], { duration: 400, iterations: 2 });
+// For handling shake by hand (touch)
+globe.addEventListener("touchstart", (e) => {
+    isDragging = true;
+    startX = e.touches[0].clientX;
+    offsetX = globe.offsetLeft;
+    moved = false;
+    globe.style.cursor = "grabbing";
+});
 
-    setTimeout(fadeOutGlobe, 800);  // Start fading out faster after shake
-}
+globe.addEventListener("touchmove", (e) => {
+    if (isDragging) {
+        let moveX = e.touches[0].clientX - startX + offsetX;
+        let maxX = window.innerWidth - 350;
+        moveX = Math.max(0, Math.min(maxX, moveX));
+        globe.style.left = `${moveX}px`;
 
-let shakeThreshold = 60; // Minimum acceleration change to trigger shake
+        if (Math.abs(e.touches[0].clientX - startX) > 10) {
+            moved = true;
+            shakeGlobe(); // Trigger shake effect when moved
+        }
+    }
+});
+
+document.addEventListener("touchend", () => {
+    if (isDragging) {
+        isDragging = false;
+        globe.style.cursor = "grab";
+    }
+});
+
+// For device motion (physical shake detection)
+let shakeThreshold = 15; // Minimum acceleration change to trigger shake
 let lastX, lastY, lastZ;
 let isShaking = false;
 
@@ -840,7 +860,7 @@ function handleShakeEvent(event) {
         if (deltaX > shakeThreshold || deltaY > shakeThreshold || deltaZ > shakeThreshold) {
             if (!isShaking) {
                 isShaking = true;
-                shakeGlobe(); // Trigger shake effect
+                shakeGlobe(); // Trigger shake effect on shake
             }
         } else {
             isShaking = false;
@@ -853,6 +873,31 @@ function handleShakeEvent(event) {
 }
 
 window.addEventListener("deviceorientation", handleShakeEvent, false);
+
+// Trigger the shake animation
+function shakeGlobe() {
+    globe.animate([
+        { transform: "translateX(5px) rotate(2deg)" },
+        { transform: "translateX(-5px) rotate(-2deg)" },
+        { transform: "translateX(5px) rotate(2deg)" },
+        { transform: "translateX(0) rotate(0deg)" }
+    ], { duration: 400, iterations: 2 });
+
+    setTimeout(fadeOutGlobe, 800);  // Start fading out faster after shake
+}
+
+function shakeGlobe() {
+    globe.animate([
+        { transform: "translateX(5px) rotate(2deg)" },
+        { transform: "translateX(-5px) rotate(-2deg)" },
+        { transform: "translateX(5px) rotate(2deg)" },
+        { transform: "translateX(0) rotate(0deg)" }
+    ], { duration: 400, iterations: 2 });
+
+    setTimeout(fadeOutGlobe, 800);  // Start fading out faster after shake
+}
+
+
 
 function fadeOutGlobe() {
     globe.style.transition = "opacity 0.8s ease-out";
