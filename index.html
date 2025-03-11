@@ -822,6 +822,38 @@ function shakeGlobe() {
     setTimeout(fadeOutGlobe, 800);  // Start fading out faster after shake
 }
 
+let shakeThreshold = 15; // Minimum acceleration change to trigger shake
+let lastX, lastY, lastZ;
+let isShaking = false;
+
+function handleShakeEvent(event) {
+    const { accelerationIncludingGravity } = event;
+    const x = accelerationIncludingGravity.x;
+    const y = accelerationIncludingGravity.y;
+    const z = accelerationIncludingGravity.z;
+
+    if (lastX && lastY && lastZ) {
+        const deltaX = Math.abs(x - lastX);
+        const deltaY = Math.abs(y - lastY);
+        const deltaZ = Math.abs(z - lastZ);
+
+        if (deltaX > shakeThreshold || deltaY > shakeThreshold || deltaZ > shakeThreshold) {
+            if (!isShaking) {
+                isShaking = true;
+                shakeGlobe(); // Trigger shake effect
+            }
+        } else {
+            isShaking = false;
+        }
+    }
+
+    lastX = x;
+    lastY = y;
+    lastZ = z;
+}
+
+window.addEventListener("deviceorientation", handleShakeEvent, false);
+
 function fadeOutGlobe() {
     globe.style.transition = "opacity 0.8s ease-out";
     globe.style.opacity = "0";
