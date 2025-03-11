@@ -1010,48 +1010,7 @@ function fadeOutRiddle() {
 // Check if it's a mobile device using the window.matchMedia() method
 const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
-// Function to apply animation on touch or hover
-function applyEnvelopeAnimation() {
-    const envelopeImage = document.querySelector('.letter-image');
-    const animatedMail = envelopeImage.querySelector('.animated-mail');
-    const shadow = envelopeImage.querySelector('.shadow');
 
-    if (isMobile) {
-        // Mobile touch events
-        envelopeImage.addEventListener('touchstart', function() {
-            // Apply animation styles on touchstart
-            animatedMail.style.transform = 'translateY(50px)';
-            animatedMail.querySelector('.top-fold').style.transform = 'rotateX(180deg)';
-            animatedMail.querySelector('.letter').style.height = '180px';
-            shadow.style.width = '250px';
-        });
-
-        envelopeImage.addEventListener('touchend', function() {
-            // Reset styles on touchend
-            animatedMail.style.transform = 'translateY(0)';
-            animatedMail.querySelector('.top-fold').style.transform = 'rotateX(0deg)';
-            animatedMail.querySelector('.letter').style.height = '150px';
-            shadow.style.width = '400px';
-        });
-    } else {
-        // Desktop hover event (already handled in CSS)
-        envelopeImage.addEventListener('mouseover', function() {
-            // Simulate hover for non-touch devices
-            animatedMail.style.transform = 'translateY(50px)';
-            animatedMail.querySelector('.top-fold').style.transform = 'rotateX(180deg)';
-            animatedMail.querySelector('.letter').style.height = '180px';
-            shadow.style.width = '250px';
-        });
-
-        envelopeImage.addEventListener('mouseout', function() {
-            // Reset styles on mouseout
-            animatedMail.style.transform = 'translateY(0)';
-            animatedMail.querySelector('.top-fold').style.transform = 'rotateX(0deg)';
-            animatedMail.querySelector('.letter').style.height = '150px';
-            shadow.style.width = '400px';
-        });
-    }
-}
 
 // Call the function when the page loads
 applyEnvelopeAnimation();
