@@ -699,6 +699,28 @@ body {
     }
 }
 
+.content span {
+    font-size: 50px;
+    background: linear-gradient(45deg, #FF6347, #FF1493, #8A2BE2, #00FA9A); /* Define a playful gradient */
+    background-size: 400% 400%; /* Make the gradient large enough to move smoothly */
+    color: transparent; /* Make the text transparent to show the background gradient */
+    -webkit-background-clip: text; /* Use background gradient for text */
+    animation: gradientMove 3s ease infinite; /* Animate the gradient */
+}
+
+/* Define the animation for the gradient movement */
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
     </style>
 </head>
 <body>
@@ -741,6 +763,7 @@ body {
         <div class="envelope-card">
         <!-- Content div (text or message) -->
             <div class="content">
+                <span>❤</span>
                 <h1>Jeanne Kaycee</h1>
                 <p>I'm so happy to send you this little surprise.😊</p>
                 <p>Sorry about the game, I had to be extra you know😂</p>
@@ -850,15 +873,24 @@ document.addEventListener("touchend", () => {
 });
 
 // For device motion (physical shake detection)
-let shakeThreshold = 15; // Minimum acceleration change to trigger shake
+let shakeThreshold = 10; // Lowered threshold for easier detection
 let lastX, lastY, lastZ;
 let isShaking = false;
 
 function handleShakeEvent(event) {
-    const { accelerationIncludingGravity } = event;
-    const x = accelerationIncludingGravity.x;
-    const y = accelerationIncludingGravity.y;
-    const z = accelerationIncludingGravity.z;
+    let acceleration;
+    
+    // For iOS devices
+    if (event.accelerationIncludingGravity) {
+        acceleration = event.accelerationIncludingGravity;
+    } else {
+        // For older Android devices
+        acceleration = event.acceleration;
+    }
+
+    const x = acceleration.x;
+    const y = acceleration.y;
+    const z = acceleration.z;
 
     if (lastX && lastY && lastZ) {
         const deltaX = Math.abs(x - lastX);
@@ -880,7 +912,9 @@ function handleShakeEvent(event) {
     lastZ = z;
 }
 
+// Listen to both deviceorientation and devicemotion for more compatibility
 window.addEventListener("deviceorientation", handleShakeEvent, false);
+window.addEventListener("devicemotion", handleShakeEvent, false);
 
 // Trigger the shake animation
 function shakeGlobe() {
@@ -894,16 +928,6 @@ function shakeGlobe() {
     setTimeout(fadeOutGlobe, 800);  // Start fading out faster after shake
 }
 
-function shakeGlobe() {
-    globe.animate([
-        { transform: "translateX(5px) rotate(2deg)" },
-        { transform: "translateX(-5px) rotate(-2deg)" },
-        { transform: "translateX(5px) rotate(2deg)" },
-        { transform: "translateX(0) rotate(0deg)" }
-    ], { duration: 400, iterations: 2 });
-
-    setTimeout(fadeOutGlobe, 800);  // Start fading out faster after shake
-}
 
 function fadeOutGlobe() {
     globe.style.transition = "opacity 0.8s ease-out";
