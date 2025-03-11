@@ -376,7 +376,7 @@ body {
   #envelope {
     display: none;
         transition: opacity 1s ease-in-out;   
-        font-family: 'Merriweather', serif;
+        font-family: 'Arial', sans-serif;
         background: linear-gradient(135deg, #ff6f61, #ffbc00);
         color: #fff;
         height: 100%;
@@ -386,7 +386,7 @@ body {
 
 
 /* Flex container to hold both the envelope and the div */
-                .envelope-card {
+        .envelope-card {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -395,15 +395,15 @@ body {
             height: 300px;
         }
 
-        /* Content div (text or message) */
+        /* Div to hold any text or content */
         .content {
-            text-align: center;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
-            max-width: 500px;
-            width: 90%;
+             text-align: center;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+        max-width: 500px;
+        width: 90%;
         }
 
         .content h1{
@@ -432,17 +432,23 @@ body {
         color: #ffb3e6;
     }
 
-        /* Animation */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+    /* Animation */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
         }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .content p:hover {
+        color: #fff;
+        transform: scale(1.05);
+        transition: all 0.3s ease-in-out;
+    }
 
         /* Envelope styles */
         .letter-image {
@@ -586,8 +592,8 @@ body {
             }
         }
 
-        /* Hidden letter (starts hidden) */
-        .letter-content {
+         /* Hidden letter (starts hidden) */
+                        .letter-content {
                     display: none;
             position: fixed;
             top: 50%;
@@ -649,7 +655,7 @@ body {
    transform: translate(-50%, -50%) scale(1); /* Center and expand */
 }
 
-.wax-seal {
+         .wax-seal {
             width: 80px;
             height: 80px;
             background: #a52a2a;
@@ -667,30 +673,30 @@ body {
             color: #fff;
             font-family: 'Dancing Script', cursive;
         }
-        
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-                align-items: center;
-                height: auto;
-            }
 
-            .content {
-                order: 1;
-                text-align: center;
-                background: rgba(0, 0, 0, 0.5);
-                padding: 20px;
-                margin-bottom: 20px;
-                box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
-                max-width: 500px;
-                width: 90%;
-            }
+         @media (max-width: 768px) {
+    .envelope-card {
+        flex-direction: column; /* Stack elements vertically */
+        align-items: center;    /* Center the content */
+        height: auto;           /* Allow container height to adjust */
+    }
 
-            .letter-image {
-                order: 2;
-                margin-bottom: 0;
-            }
-        }
+    .content {
+        order: 1; /* Make sure the content appears first */
+        text-align: center;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 20px;
+        margin-bottom: 20px;  /* Space between content and letter-image */
+        box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+        max-width: 500px;
+        width: 90%;
+    }
+
+    .letter-image {
+        order: 2; /* Move letter-image to the bottom */
+        margin-bottom: 0;   /* Remove bottom margin on mobile */
+    }
+}
 
     </style>
 </head>
@@ -759,15 +765,16 @@ body {
         </div>
         <div class="shadow"></div>
         <div class="letter-content">
-            <p>Hello snuggles,</p>
-            <p>There’s nothing quite like a handwritten note, but I wanted to add my own little twist to it. Receiving your letter was an experience I never thought I’d have, and I don’t think you realize just how much joy it brought me. It’s a sentiment I’ll treasure forever. This is me, writing a letter of reply, and I love the fact that we’re constantly pushing each other to find new ways appreciate each other. Our standards are gonna  be ridiculously high lol.</p>
-            <p>Coincidence? Maybe not. Fate? Probably. Whatever force brought us back together, I’m grateful for it. You’ve made me question my own introversion, cause what do you mean we literally say goodbye a million times, yet the conversation never really ends? It’s a new experience for me, and you unlocked that part of me effortlessly.</p>
-            <p>The saying "it takes one to know one" has never felt more true. Just as you shower me with love, compliments, and kindness, know that in my eyes, you are a million times more—understanding, generous, caring, vibrant, considerate... simply perfection. Even tricking me so that I can exercise, will not work again, I’m onto you😂😂I thank you for sharing you family with me too. I always wanted a sisteeerrrrrr😂 and now I have 3 girls I can disturb. 😂😂Just give me some time to grow comfortable and not feel like I’m imposing on you guys.</p>
-            <p>As the year progresses, I do hope that we grow closer and closer, creating lasting memories and getting to do more activities together. And even if life takes us in different directions, we’ll always make time for each other cause when you find something good, you hold on for dear life. And you, Kaycee, are that something good.</p>
-            <p>Bear with me I do joke a lot sometimes, so don’t kick me to the curb for that😂 How about I make up for all the times I’ve disturbed you with a little secret you’ve been wanting to know? I did tell you I’m ticklish, you just don’t know where. Honestly, I don’t know how you never thought to tickle my feet, cause you would have been already torturing me. 😭😂</p>
-            <p>Btw you gotta come teach me this handwriting of yours so that next time I write you a note😂😂Its so lovely, just like everything about you. I cherish, love, value, and adore you more than words can say. Thankyou for adding joy, positivity and love into my life. You deserve the world, and I know you’re going to get it.</p>
-            <p>Lots of love,</p>
-            <p>Your Opps, Hater, Morio, Potential Fiancée, Babes, Extrovert 😂😂</p>
+             <p>Hello snuggles,</p>
+    <p>There’s nothing quite like a handwritten note, but I wanted to add my own little twist to it. Receiving your letter was an experience I never thought I’d have, and I don’t think you realize just how much <span>joy</span> it brought me. It’s a sentiment I’ll treasure forever. This is me, writing a letter of reply, and I love the fact that we’re constantly pushing each other to find new ways to appreciate each other. Our standards are gonna be ridiculously high lol.</p>
+    <p>Coincidence? Maybe not. Fate? Probably. Whatever force brought us back together, I’m <span>grateful</span> for it. You’ve made me question my own introversion, cause what do you mean we literally say goodbye a million times, yet the conversation never really ends? It’s a new experience for me, and you unlocked that part of me effortlessly.</p>
+    <p>The saying "<i>it takes one to know one</i>" has never felt more true. Just as you shower me with love, compliments, and kindness, know that in my eyes, you are a million times more—<span>understanding, generous, caring, vibrant, considerate...</span> simply perfection. Even tricking me so that I can exercise will not work again, I’m onto you 😂😂</p>
+    <p>I thank you for sharing your family with me too. I always wanted a sisteeerrrrrr 😂 and now I have <span>3 girls</span> I can disturb. 😂😂 Just give me some time to grow comfortable and not feel like I’m imposing on you guys.</p>
+    <p>As the year progresses, I do hope that we grow closer and closer, creating lasting memories and getting to do more activities together. And even if life takes us in different directions, we’ll always make time for each other cause when you find something good, you <span>hold on for dear life.</span> And you, Kaycee, are that something good.</p>
+    <p>Bear with me, I do joke a lot sometimes, so don’t kick me to the curb for that 😂 How about I make up for all the times I’ve disturbed you with a little secret you’ve been wanting to know? I did tell you I’m ticklish, you just don’t know where. Honestly, I don’t know how you never thought to tickle my feet, cause you would have been already torturing me. 😭😂</p>
+    <p>Btw, you gotta come teach me this handwriting of yours so that next time I write you a note 😂😂 It’s so lovely, just like everything about you. I <span>cherish, love, value, and adore</span> you more than words can say. Thank you for adding joy, positivity, and love into my life. You deserve the world, and I know you’re going to get it.</p>
+    <p>Lots of love,</p>
+    <p>Your <span>Opps, Hater, Morio, Potential Fiancée, Babes, Extrovert</span> 😂😂</p>
             <div class="wax-seal">❤️</div>
         </div>
     </div>
@@ -897,8 +904,6 @@ function shakeGlobe() {
     setTimeout(fadeOutGlobe, 800);  // Start fading out faster after shake
 }
 
-
-
 function fadeOutGlobe() {
     globe.style.transition = "opacity 0.8s ease-out";
     globe.style.opacity = "0";
@@ -1002,9 +1007,56 @@ function fadeOutRiddle() {
     }, 3000); // Matches transition duration
 }
 
+// Check if it's a mobile device using the window.matchMedia() method
+const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
+// Function to apply animation on touch or hover
+function applyEnvelopeAnimation() {
+    const envelopeImage = document.querySelector('.letter-image');
+    const animatedMail = envelopeImage.querySelector('.animated-mail');
+    const shadow = envelopeImage.querySelector('.shadow');
 
-    document.addEventListener("DOMContentLoaded", function () {
+    if (isMobile) {
+        // Mobile touch events
+        envelopeImage.addEventListener('touchstart', function() {
+            // Apply animation styles on touchstart
+            animatedMail.style.transform = 'translateY(50px)';
+            animatedMail.querySelector('.top-fold').style.transform = 'rotateX(180deg)';
+            animatedMail.querySelector('.letter').style.height = '180px';
+            shadow.style.width = '250px';
+        });
+
+        envelopeImage.addEventListener('touchend', function() {
+            // Reset styles on touchend
+            animatedMail.style.transform = 'translateY(0)';
+            animatedMail.querySelector('.top-fold').style.transform = 'rotateX(0deg)';
+            animatedMail.querySelector('.letter').style.height = '150px';
+            shadow.style.width = '400px';
+        });
+    } else {
+        // Desktop hover event (already handled in CSS)
+        envelopeImage.addEventListener('mouseover', function() {
+            // Simulate hover for non-touch devices
+            animatedMail.style.transform = 'translateY(50px)';
+            animatedMail.querySelector('.top-fold').style.transform = 'rotateX(180deg)';
+            animatedMail.querySelector('.letter').style.height = '180px';
+            shadow.style.width = '250px';
+        });
+
+        envelopeImage.addEventListener('mouseout', function() {
+            // Reset styles on mouseout
+            animatedMail.style.transform = 'translateY(0)';
+            animatedMail.querySelector('.top-fold').style.transform = 'rotateX(0deg)';
+            animatedMail.querySelector('.letter').style.height = '150px';
+            shadow.style.width = '400px';
+        });
+    }
+}
+
+// Call the function when the page loads
+applyEnvelopeAnimation();
+
+ document.addEventListener("DOMContentLoaded", function () {
     const letterImage = document.querySelector('.letter-image');
     const letterContent = document.querySelector('.letter-content');
     const waxSeal = document.querySelector('.wax-seal');
